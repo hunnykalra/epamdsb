@@ -36,6 +36,17 @@ public class RestExceptionHandler {
 		errors.put("status", StatusCodeEnum.UNEXPECTED_ERROR.getMessage());
 		return this.buildResponseEntity(errors, HttpStatus.BAD_REQUEST);
 	}
+	
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(OrderNotFoundException.class)
+	public ResponseEntity handleOrderNotFoundExceptions(OrderNotFoundException ex) {
+		Map<String, String> errors = new HashMap<>();
+		errors.put("message", ex.getLocalizedMessage());
+		errors.put("status", StatusCodeEnum.UNEXPECTED_ERROR.getMessage());
+		return this.buildResponseEntity(errors, HttpStatus.BAD_REQUEST);
+	}
+
+
 
 	private ResponseEntity buildResponseEntity(Map<String, String> map ,HttpStatus httpStatus) {
 		return new ResponseEntity<>(map,httpStatus);
