@@ -2,6 +2,8 @@ package com.epam.dsb.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.epam.dsb.beans.OrderItemBean;
-import com.epam.dsb.impl.OrderItemServiceImpl;
+import com.epam.dsb.services.OrderItemServiceImpl;
 
 @RestController
 @RequestMapping("/orderItem")
@@ -24,7 +26,7 @@ public class OrderItemController {
 	OrderItemServiceImpl orderItemServiceImpl;
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> createOrderItem(@RequestBody List<OrderItemBean> orderItemBean,
+	public ResponseEntity<Object> createOrderItem(@RequestBody @Valid List<OrderItemBean> orderItemBean,
 			@RequestParam("orderId") String orderId) {
 		List<String> ordeItems = orderItemServiceImpl.createOrderItem(orderItemBean, orderId);
 		if (ordeItems.size() != 0)
@@ -34,7 +36,7 @@ public class OrderItemController {
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,value="/{orderId}")
-	public ResponseEntity<Object> reteriveOrderItemByOrderId(@PathVariable("orderId") String orderID){
+	public ResponseEntity<Object> reteriveOrderItemByOrderId(@PathVariable(value = "orderId",required = true) String orderID){
 		List<OrderItemBean> orderItemBeans = orderItemServiceImpl.reteriveOrderItemsByorderID(orderID);
 		return new ResponseEntity<Object>(orderItemBeans,HttpStatus.OK);
 	}

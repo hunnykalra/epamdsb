@@ -4,6 +4,7 @@ package com.epam.dsb.bean;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -42,6 +43,8 @@ public class Order {
 		this.customerName = customerName;
 	}
 
+	@Valid
+	@Size(max = 1)
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
 	}

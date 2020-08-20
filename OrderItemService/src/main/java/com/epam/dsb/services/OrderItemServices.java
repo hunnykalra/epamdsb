@@ -8,5 +8,9 @@ public interface OrderItemServices {
 	
 	public List<String> createOrderItem(List<OrderItemBean> orderItemBeans,String orderId);
 	
-	public List<OrderItemBean> reteriveOrderItemsByorderID(String orderID); 
+	public List<OrderItemBean> reteriveOrderItemsByorderID(String orderID);
+	
+	public String checkOrderItem(String productName, String productCode);
+	
+	public void saveOrderItemMapping(List<String> orderItemIds,String orderId);
 }

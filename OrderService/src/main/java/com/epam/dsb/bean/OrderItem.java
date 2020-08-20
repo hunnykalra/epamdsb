@@ -1,6 +1,11 @@
 package com.epam.dsb.bean;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
 
 public class OrderItem {
 
@@ -8,8 +13,10 @@ public class OrderItem {
 	private String productName;
 	@NotNull(message = "ProductCode cannot be empty")
 	private String productCode;
-	@NotNull(message = "Quantity cannot be empty")
-	private int quantity;
+	
+	@NotNull(message="quantity value should be 1 or greater")	
+	@Range(min = 1)
+	private Integer quantity;
 
 	public OrderItem() {
 
@@ -31,11 +38,11 @@ public class OrderItem {
 		this.productCode = productCode;
 	}
 
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 }

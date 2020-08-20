@@ -14,11 +14,10 @@ public class OrderItemEntity {
 	@Id	
 	@Column(name="id")
 	private String id;
-	@Column(name="order_id")
-	private String orderId;
-	@Column(name="product_name")
+	
+	@Column(name="product_name",unique = true)	
 	private String productName;
-	@Column(name="product_code")
+	@Column(name="product_code",unique = true)
 	private String productCode;
 	@Column(name="quantity")
 	private Integer quantity;
@@ -33,12 +32,7 @@ public class OrderItemEntity {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getOrderId() {
-		return orderId;
-	}
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
-	}
+
 	public String getProductName() {
 		return productName;
 	}
